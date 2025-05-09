@@ -10,21 +10,19 @@
     self,
     nixpkgs,
     flake-utils,
+  }: {
+    config ? {
+      darkBG = "#0d1214";
+      lightBG = "#0d1214";
+      darkText = "#cae0eb";
+      lightText = "#cae0eb";
+    },
   }:
     flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = import nixpkgs {
           inherit system;
         };
-
-        # Get config or fallback to defaults
-        config = {
-          darkBG = "#0d1214";
-          lightBG = "#0d1214";
-          darkText = "#cae0eb";
-          lightText = "#cae0eb";
-        };
-
         inherit
           (config)
           darkBG
