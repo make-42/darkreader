@@ -122,7 +122,8 @@
             ];
           };
       in {
-        packages.darkFirefox = darkFirefox;
+        packages.darkLibrefox = darkFirefox;
+        packages.darkreaderAddon = darkreaderAddon;
         defaultPackage = darkFirefox;
       }
     );
