@@ -632,6 +632,20 @@ export function createOrUpdateDynamicTheme(theme: Theme, dynamicThemeFixes: Dyna
     // TODO: add a navigation listener here for this case
 
     createOrUpdateDynamicThemeInternal(theme, dynamicThemeFix, iframe);
+    
+    /* Nix Flake Overrides */
+    let applyNixOverwrite = false;
+    let overrideDarkBG = "__OVERRIDE_DARK_SCHEME_BACKGROUND_COLOR__";
+    let overrideLightBG = "__OVERRIDE_LIGHT_SCHEME_BACKGROUND_COLOR__";
+    let overrideDarkText = "__OVERRIDE_DARK_SCHEME_TEXT_COLOR__";
+    let overrideLightText = "__OVERRIDE_LIGHT_SCHEME_TEXT_COLOR__";
+      
+    if (applyNixOverwrite) { 
+      theme["darkSchemeBackgroundColor"] = overrideDarkBG;
+      theme["darkSchemeTextColor"] = overrideDarkText;
+      theme["lightSchemeBackgroundColor"] = overrideLightBG;
+      theme["lightSchemeTextColor"] = overrideLightText;
+    }
 }
 
 let prevTheme: Theme | null = null;
@@ -749,7 +763,6 @@ export function createOrUpdateDynamicThemeInternal(themeConfig: Theme, dynamicTh
         });
         headObserver.observe(document, {childList: true, subtree: true});
     }
-
     prevTheme = theme;
     prevFixes = fixes;
 }
